@@ -1,5 +1,17 @@
+import tkinter
 from tkinter import *
 from pygame import mixer
+from tkinter import filedialog
+from tkinter import messagebox
+
+def browsefile():
+    filename = filedialog.askopenfilename()
+    try:
+        print(filename)
+        mixer.music.load(filename)
+    except:
+        tkinter.messagebox.showerror('Error','Unsupported or currupted file.')
+
 
 mixer.init() # init mixer
 
@@ -17,8 +29,9 @@ root.config(menu = menubar) #makiing it stick to the top and preparing for subme
 #creating submenus
 submenu = Menu(menubar, tearoff=0)
 menubar.add_cascade(label="File", menu=submenu)
-submenu.add_command(label="Open")
-submenu.add_command(label="Exit")
+submenu.add_command(label="Open", command=browsefile)
+submenu.add_command(label="Exit",command=root.destroy)
+
 
 submenu = Menu(menubar, tearoff=0)
 menubar.add_cascade(label="Help", menu=submenu)
@@ -45,6 +58,8 @@ def pausesong():
 def setvol(val):
     vol= int (val)/100
     mixer.music.set_volume(vol)
+
+
 
 playphoto = PhotoImage(file='play32.png')
 playbtn = Button(root, image=playphoto, command = playsong)
