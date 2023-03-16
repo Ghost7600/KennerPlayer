@@ -8,6 +8,25 @@ root = Tk() #creates windows obj
 root.title("Kenner Player")
 root.iconbitmap(r'logo.ico')
 root.geometry('640x480')
+
+#creating menubar
+menubar = Menu(root)
+root.config(menu = menubar) #makiing it stick to the top and preparing for submenus
+
+
+#creating submenus
+submenu = Menu(menubar, tearoff=0)
+menubar.add_cascade(label="File", menu=submenu)
+submenu.add_command(label="Open")
+submenu.add_command(label="Exit")
+
+submenu = Menu(menubar, tearoff=0)
+menubar.add_cascade(label="Help", menu=submenu)
+submenu.add_command(label="About")
+
+
+
+
 mixer.music.load("Matt_Oakley-Mercury_Ascendant.mp3")
 
 text = Label(root, text = 'The lightest player!')
@@ -37,5 +56,7 @@ stopbtn.pack()
 scale = Scale(root,from_=0,to=100,orient=HORIZONTAL,command= setvol)
 scale.set(10)
 scale.pack()
+
+
 
 root.mainloop()
