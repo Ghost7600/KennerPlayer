@@ -18,7 +18,8 @@ mixer.init() # init mixer
 
 root = Tk() #creates windows obj
 root.title("Kenner Player")
-root.iconbitmap(r'C:\Users\kenne\PycharmProjects\player\logo.ico')
+root.iconbitmap(default='logo.ico')
+#root.iconbitmap(r'./logo.ico')
 root.geometry('640x480')
 
 #creating menubar
@@ -39,8 +40,11 @@ submenu.add_command(label="About")
 
 
 
-
-mixer.music.load(r'C:\Users\kenne\PycharmProjects\player\Matt_Oakley-Mercury_Ascendant.mp3')
+try:
+    mixer.music.load('Matt_Oakley-Mercury_Ascendant.mp3')
+except:
+    tkinter.messagebox.showerror('Error', 'Music File Missing.')
+    browsefile()
 
 text = Label(root, text = 'The lightest player!')
 text.pack()
@@ -61,7 +65,7 @@ def setvol(val):
 
 
 
-playphoto = PhotoImage(file=r'C:\Users\kenne\PycharmProjects\player\play32.png')
+playphoto = PhotoImage(file='play32.png')
 playbtn = Button(root, image=playphoto, command = playsong)
 playbtn.pack()
 
